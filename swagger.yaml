@@ -1,0 +1,320 @@
+openapi: 3.0.1
+info:
+  title: DurpAPI
+  description: API for Durp's needs
+  termsOfService: http://swagger.io/terms/
+  contact:
+    name: API Support
+    url: https://durp.info
+    email: developerdurp@durp.info
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 0.1.0-dev0102
+servers:
+  - url: https://api.durp.info/durpapi
+paths:
+  /health/gethealth:
+    get:
+      tags:
+        - health
+      summary: Generate Health status
+      description: Get the health of the API
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+  /jokes/dadjoke:
+    get:
+      tags:
+        - DadJoke
+      summary: Get dadjoke
+      description: get a dad joke
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+    post:
+      tags:
+        - DadJoke
+      summary: Generate dadjoke
+      description: create a dad joke
+      parameters:
+        - name: joke
+          in: query
+          description: Dad Joke you wish to enter into database
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+    delete:
+      tags:
+        - DadJoke
+      summary: Generate dadjoke
+      description: create a dad joke
+      parameters:
+        - name: joke
+          in: query
+          description: Dad joke you wish to delete from the database
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '500':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+  /openai/general:
+    get:
+      tags:
+        - openai
+      summary: Gerneral ChatGPT
+      description: Ask ChatGPT a general question
+      parameters:
+        - name: message
+          in: query
+          description: Ask ChatGPT a general question
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+  /openai/travelagent:
+    get:
+      tags:
+        - openai
+      summary: Travel Agent ChatGPT
+      description: Ask ChatGPT for suggestions as if it was a travel agent
+      parameters:
+        - name: message
+          in: query
+          description: Ask ChatGPT for suggestions as a travel agent
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+        '400':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+  /unraid/powerusage:
+    get:
+      tags:
+        - unraid
+      summary: Unraid PSU Stats
+      description: Gets the PSU Data from unraid
+      responses:
+        '200':
+          description: response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  12v_load:
+                    type: integer
+                  12v_watts:
+                    type: integer
+                  3v_load:
+                    type: integer
+                  3v_watts:
+                    type: integer
+                  5v_load:
+                    type: integer
+                  5v_watts:
+                    type: integer
+                  capacity:
+                    type: string
+                  efficiency:
+                    type: integer
+                  fan_rpm:
+                    type: integer
+                  load:
+                    type: integer
+                  poweredon:
+                    type: string
+                  poweredon_raw:
+                    type: string
+                  product:
+                    type: string
+                  temp1:
+                    type: integer
+                  temp2:
+                    type: integer
+                  uptime:
+                    type: string
+                  uptime_raw:
+                    type: string
+                  vendor:
+                    type: string
+                  watts:
+                    type: integer
+        '412':
+          description: error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: message
+components:
+  schemas:
+    model.Message:
+      type: object
+      properties:
+        message:
+          type: string
+          example: message
+    model.PowerSupply:
+      type: object
+      properties:
+        12v_load:
+          type: integer
+        12v_watts:
+          type: integer
+        3v_load:
+          type: integer
+        3v_watts:
+          type: integer
+        5v_load:
+          type: integer
+        5v_watts:
+          type: integer
+        capacity:
+          type: string
+        efficiency:
+          type: integer
+        fan_rpm:
+          type: integer
+        load:
+          type: integer
+        poweredon:
+          type: string
+        poweredon_raw:
+          type: string
+        product:
+          type: string
+        temp1:
+          type: integer
+        temp2:
+          type: integer
+        uptime:
+          type: string
+        uptime_raw:
+          type: string
+        vendor:
+          type: string
+        watts:
+          type: integer
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      name: Authorization
+      in: header
