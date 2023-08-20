@@ -12,35 +12,8 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.1.0-dev0102
 servers:
-  - url: https://api.durp.info/durpapi
+  - url: https://api.durp.info
 paths:
-  /health/gethealth:
-    get:
-      tags:
-        - health
-      summary: Generate Health status
-      description: Get the health of the API
-      responses:
-        '200':
-          description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
-        '400':
-          description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
   /jokes/dadjoke:
     get:
       tags:
