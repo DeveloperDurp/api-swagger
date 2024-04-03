@@ -1,7 +1,8 @@
-openapi: 3.0.1
+schemes: []
+swagger: '2.0'
 info:
-  title: DurpAPI
   description: API for Durp's needs
+  title: DurpAPI
   termsOfService: http://swagger.io/terms/
   contact:
     name: API Support
@@ -10,284 +11,157 @@ info:
   license:
     name: Apache 2.0
     url: http://www.apache.org/licenses/LICENSE-2.0.html
-  version: 0.1.0-dev0102
-servers:
-  - url: https://api.durp.info
+  version: 0.1.0-dev0141
+host: api.durp.info
+basePath: /api
 paths:
+  /health/gethealth:
+    get:
+      security:
+        - Authorization: []
+      description: Get the health of the API
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      tags:
+        - health
+      summary: Generate Health status
+      responses:
+        '200':
+          description: response
+          schema:
+            $ref: '#/definitions/model.Message'
+        '500':
+          description: error
+          schema:
+            $ref: '#/definitions/model.Message'
   /jokes/dadjoke:
     get:
+      description: get a dad joke
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
         - DadJoke
       summary: Get dadjoke
-      description: get a dad joke
       responses:
         '200':
           description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
         '500':
           description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
     post:
+      description: create a dad joke
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
         - DadJoke
       summary: Generate dadjoke
-      description: create a dad joke
       parameters:
-        - name: joke
-          in: query
+        - type: string
           description: Dad Joke you wish to enter into database
+          name: joke
+          in: query
           required: true
-          schema:
-            type: string
       responses:
         '200':
           description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
         '500':
           description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
     delete:
+      description: create a dad joke
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
         - DadJoke
       summary: Generate dadjoke
-      description: create a dad joke
       parameters:
-        - name: joke
-          in: query
+        - type: string
           description: Dad joke you wish to delete from the database
+          name: joke
+          in: query
           required: true
-          schema:
-            type: string
       responses:
         '200':
           description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
         '500':
           description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
   /openai/general:
     get:
+      description: Ask ChatGPT a general question
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
         - openai
       summary: Gerneral ChatGPT
-      description: Ask ChatGPT a general question
       parameters:
-        - name: message
-          in: query
+        - type: string
           description: Ask ChatGPT a general question
+          name: message
+          in: query
           required: true
-          schema:
-            type: string
       responses:
         '200':
           description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
         '400':
           description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
   /openai/travelagent:
     get:
+      description: Ask ChatGPT for suggestions as if it was a travel agent
+      consumes:
+        - application/json
+      produces:
+        - application/json
       tags:
         - openai
       summary: Travel Agent ChatGPT
-      description: Ask ChatGPT for suggestions as if it was a travel agent
       parameters:
-        - name: message
-          in: query
+        - type: string
           description: Ask ChatGPT for suggestions as a travel agent
+          name: message
+          in: query
           required: true
-          schema:
-            type: string
       responses:
         '200':
           description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
+          schema:
+            $ref: '#/definitions/model.Message'
         '400':
           description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
-  /unraid/powerusage:
-    get:
-      tags:
-        - unraid
-      summary: Unraid PSU Stats
-      description: Gets the PSU Data from unraid
-      responses:
-        '200':
-          description: response
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  12v_load:
-                    type: integer
-                  12v_watts:
-                    type: integer
-                  3v_load:
-                    type: integer
-                  3v_watts:
-                    type: integer
-                  5v_load:
-                    type: integer
-                  5v_watts:
-                    type: integer
-                  capacity:
-                    type: string
-                  efficiency:
-                    type: integer
-                  fan_rpm:
-                    type: integer
-                  load:
-                    type: integer
-                  poweredon:
-                    type: string
-                  poweredon_raw:
-                    type: string
-                  product:
-                    type: string
-                  temp1:
-                    type: integer
-                  temp2:
-                    type: integer
-                  uptime:
-                    type: string
-                  uptime_raw:
-                    type: string
-                  vendor:
-                    type: string
-                  watts:
-                    type: integer
-        '412':
-          description: error
-          content:
-            application/json:
-              schema:
-                type: object
-                properties:
-                  message:
-                    type: string
-                    example: message
-components:
-  schemas:
-    model.Message:
-      type: object
-      properties:
-        message:
-          type: string
-          example: message
-    model.PowerSupply:
-      type: object
-      properties:
-        12v_load:
-          type: integer
-        12v_watts:
-          type: integer
-        3v_load:
-          type: integer
-        3v_watts:
-          type: integer
-        5v_load:
-          type: integer
-        5v_watts:
-          type: integer
-        capacity:
-          type: string
-        efficiency:
-          type: integer
-        fan_rpm:
-          type: integer
-        load:
-          type: integer
-        poweredon:
-          type: string
-        poweredon_raw:
-          type: string
-        product:
-          type: string
-        temp1:
-          type: integer
-        temp2:
-          type: integer
-        uptime:
-          type: string
-        uptime_raw:
-          type: string
-        vendor:
-          type: string
-        watts:
-          type: integer
-  securitySchemes:
-    ApiKeyAuth:
-      type: apiKey
-      name: Authorization
-      in: header
+          schema:
+            $ref: '#/definitions/model.Message'
+definitions:
+  model.Message:
+    type: object
+    properties:
+      message:
+        type: string
+        example: message
+securityDefinitions:
+  Authorization:
+    type: apiKey
+    name: Authorization
+    in: header
