@@ -13,7 +13,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0.html
   version: 0.1.0-dev0141
 host: api.durp.info
-basePath: /api
+basePath: /
 paths:
   /health/gethealth:
     get:
